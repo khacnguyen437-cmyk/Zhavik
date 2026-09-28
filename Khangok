@@ -1,0 +1,84 @@
+-- ZHAVIK ⚡ GUI
+-- LocalScript -> StarterPlayer > StarterPlayerScripts
+
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+
+local gui = Instance.new("ScreenGui")
+gui.Name = "ZhavikGUI"
+gui.ResetOnSpawn = false
+gui.Parent = player:WaitForChild("PlayerGui")
+
+-- LOGO
+local logo = Instance.new("ImageButton")
+logo.Name = "ZhavikLogo"
+logo.Size = UDim2.fromOffset(70, 70)
+logo.Position = UDim2.new(0, 20, 0.5, -35)
+logo.BackgroundTransparency = 1
+
+-- THAY YOUR_ASSET_ID BẰNG ID LOGO CỦA MÀY
+logo.Image = "rbxassetid://YOUR_ASSET_ID"
+
+logo.ScaleType = Enum.ScaleType.Fit
+logo.Parent = gui
+
+-- MENU
+local menu = Instance.new("Frame")
+menu.Name = "Menu"
+menu.Size = UDim2.fromOffset(280, 330)
+menu.Position = UDim2.new(0, 100, 0.5, -165)
+menu.BackgroundColor3 = Color3.fromRGB(12, 14, 20)
+menu.Visible = false
+menu.Parent = gui
+
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 16)
+corner.Parent = menu
+
+local stroke = Instance.new("UIStroke")
+stroke.Color = Color3.fromRGB(0, 170, 255)
+stroke.Thickness = 2
+stroke.Parent = menu
+
+-- TIÊU ĐỀ
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 55)
+title.BackgroundTransparency = 1
+title.Text = "ZHAVIK ⚡"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextSize = 24
+title.Font = Enum.Font.GothamBold
+title.Parent = menu
+
+-- TẠO NÚT
+local function createToggle(name, y)
+	local button = Instance.new("TextButton")
+
+	button.Size = UDim2.new(1, -30, 0, 48)
+	button.Position = UDim2.fromOffset(15, y)
+
+	button.BackgroundColor3 = Color3.fromRGB(30, 34, 43)
+	button.Text = name .. "   |   TẮT"
+	button.TextColor3 = Color3.fromRGB(255, 255, 255)
+	button.TextSize = 16
+	button.Font = Enum.Font.GothamBold
+	button.Parent = menu
+
+	local c = Instance.new("UICorner")
+	c.CornerRadius = UDim.new(0, 10)
+	c.Parent = button
+
+	local enabled = false
+
+	button.MouseButton1Click:Connect(function()
+		enabled = not enabled
+
+		if enabled then
+			button.Text = name .. "   |   BẬT"
+			button.BackgroundColor3 = Color3.fromRGB(0, 120, 75)
+		else
+			button.Text = name .. "   |   TẮT"
+			button.BackgroundColor3 = Color3.fromRGB(30, 34, 43)
+		end
